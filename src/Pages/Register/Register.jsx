@@ -2,6 +2,21 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const Register = () => {
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        const form = event.target;
+        const name = form.name.value;
+        const photoURL = form.photo.value;
+        const email = form.email.value;
+        const password = form.password.value;
+
+        console.log(name, email, password, photoURL);
+    };
+
+
+
+
   return (
     <section className="">
       <div className=" items-center px-5 py-12 lg:px-20 ">
@@ -10,6 +25,7 @@ const Register = () => {
             <p className="text-center font-bold text-3xl">Register</p>
             <div className="mt-6">
               <form
+              onSubmit={handleSubmit}
                action="#" method="POST" className="space-y-6">
                 <div className="">
                   <div>
