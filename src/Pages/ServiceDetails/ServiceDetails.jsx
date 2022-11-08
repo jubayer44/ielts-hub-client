@@ -5,15 +5,16 @@ import { AuthContext } from "../../Context/AuthProvider";
 const ServiceDetails = () => {
 const {user} = useContext(AuthContext);
 const {id} = useParams();
-const [service, setService] = useState();
+const [service, setService] = useState({});
 
-console.log(service);
+console.log(service, user);
+const {img, serviceName, price, description, rating} = service;
 
 
 useEffect(()=> {
-  fetch(`http://localhost:5000/${id}`)
+  fetch(`http://localhost:5000/services/${id}`)
   .then(res => res.json())
-  .then(data => setService(data))
+  .then(data =>setService(data))
 }, [id]);
 
   return (
@@ -21,19 +22,19 @@ useEffect(()=> {
       <div className="container bg-gray-100 rounded-md max-w-6xl p-6 mx-auto space-y-6 sm:space-y-12">
         <div className="block  gap-3 mx-auto sm:max-w-full group hover:no-underline focus:no-underline lg:grid lg:grid-cols-12">
           <img
-            src="https://source.unsplash.com/random/480x360"
+            src={img}
             alt=""
             className="object-cover w-full h-64 rounded sm:h-96 lg:col-span-6 bg-gray-500"
           />
           <div className="p-6 space-y-2 lg:col-span-6">
-            <h3 className="text-2xl font-semibold sm:text-4xl group-hover:underline group-focus:underline">
-              Noster tincidunt reprimique ad pro
+            <h3 className="text-2xl font-semibold sm:text-4xl">
+              {serviceName}
             </h3>
-            <span className="text-xs text-gray-400">February 19, 2021</span>
+            <p className="text-red-500 font-semibold font-sans">Price: $ {price}</p>
             <p>
-              Ei delenit sensibus liberavisse pri. Quod suscipit no nam. Est in
-              graece fuisset, eos affert putent doctus id.
+              {description}
             </p>
+            <button className="btn btn-primary normal-case">Enroll Today</button>
           </div>
         </div>
         <div className="border-black w-full bg-gray-400 p-[0.5px]"></div>
