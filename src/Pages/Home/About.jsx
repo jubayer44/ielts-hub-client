@@ -7,7 +7,7 @@ const About = () => {
         <h2 className="text-3xl mb-5 font-bold text-center">About Me</h2>
         <div className="flex flex-col space-y-4 md:space-y-0 md:space-x-6 md:flex-row">
           <img
-            src="https://source.unsplash.com/75x75/?portrait"
+            src="https://i.ibb.co/NpKHQvM/handsome-confident-smiling-man-with-hands-crossed-chest-176420-18743.webp"
             alt=""
             className="self-center flex-shrink-0 w-24 h-24 border rounded-full md:justify-self-start  border-gray-700"
           />
