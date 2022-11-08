@@ -1,4 +1,7 @@
 import React from "react";
+import { PhotoProvider, PhotoView } from "react-photo-view";
+import 'react-photo-view/dist/react-photo-view.css';
+
 import { Link } from "react-router-dom";
 
 const Service = () => {
@@ -8,15 +11,20 @@ const Service = () => {
         <h1 className="text-4xl font-bold text-center">My Services</h1>
         <div className="grid max-w-lg gap-12 mx-auto mt-12 lg:grid-cols-3 lg:max-w-none">
           <div className="flex flex-col mb-12 overflow-hidden cursor-pointer shadow-xl p-2 rounded-md">
-            <a href="/">
+            <div>
               <div className="flex-shrink-0">
-                <img
+                <PhotoProvider>
+                  <PhotoView src="https://coachify.co.in/wp-content/uploads/2020/08/335-Complete-English-Course-Beginner-Level.jpg">
+                  <img
                   className="object-cover w-full h-48 rounded-lg"
                   src="https://coachify.co.in/wp-content/uploads/2020/08/335-Complete-English-Course-Beginner-Level.jpg"
                   alt=""
                 />
+                  </PhotoView>
+                </PhotoProvider>
+                
               </div>
-            </a>
+            </div>
             <div className="flex flex-col justify-between flex-1">
               <div className="flex-1">
                
