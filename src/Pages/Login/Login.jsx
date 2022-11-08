@@ -1,10 +1,11 @@
 import React, { useContext } from "react";
+import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthProvider";
 
 const Login = () => {
   
-  const {logIn} = useContext(AuthContext);
+  const {logIn, forgetPassword} = useContext(AuthContext);
   
   
   
@@ -19,10 +20,24 @@ const Login = () => {
     logIn(email, password)
     .then(response => {
         const user = response.user;
+        toast.success('Login Success')
+        form.reset();
         console.log(user);
     })
 
   };
+
+  //Forget Password
+  const handleForgetPassword = (event) => {
+    const email = event.target.value;
+    forgetPassword(email)
+    .then((res) =>{
+        toast.success('Password Reset Successfully, Please Check your email')
+        
+    })
+    .catch(err => console.error(err))
+    
+  }
 
   return (
     <section className="">
@@ -48,6 +63,7 @@ const Login = () => {
                     </label>
                     <div className="mt-1">
                       <input
+                      onBlur={handleForgetPassword}
                         id="email"
                         name="email"
                         type="email"
@@ -100,13 +116,14 @@ const Login = () => {
                     </label>
                   </div>
                   <div className="text-sm">
-                    <a
-                      href="/"
+                    <Link 
+                    
+                      to=""
                       className="font-medium text-blue-600 hover:text-blue-500"
                     >
                       {" "}
                       Forgot your password?{" "}
-                    </a>
+                    </Link>
                   </div>
                 </div>
                 <div>

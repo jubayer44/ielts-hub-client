@@ -11,6 +11,8 @@ export default function NavBar() {
       .then(() => {})
       .catch((err) => console.error(err));
   };
+  
+  
 
   return (
     <nav className="w-full bg-white shadow">

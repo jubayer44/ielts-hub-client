@@ -3,6 +3,7 @@ import {
   createUserWithEmailAndPassword,
   getAuth,
   onAuthStateChanged,
+  sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signOut,
   updateProfile,
@@ -16,7 +17,7 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  console.log(user);
+//   console.log(user);
 
   //Sign Up user
   const createUer = (email, password) => {
@@ -36,6 +37,11 @@ const AuthProvider = ({ children }) => {
     });
   };
 
+  //Forget Password
+  const forgetPassword = (email) => {
+    return sendPasswordResetEmail(auth, email);
+  };
+
   //Log Out
   const logOut = () => {
     setLoading(false);
@@ -52,7 +58,7 @@ const AuthProvider = ({ children }) => {
     }
   }, []);
 
-  const authInfo = { user, createUer, logIn, updateUser, loading, logOut };
+  const authInfo = { user, createUer, logIn, updateUser, loading, logOut, forgetPassword };
 
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
