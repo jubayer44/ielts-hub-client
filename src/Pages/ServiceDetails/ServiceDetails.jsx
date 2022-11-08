@@ -1,12 +1,16 @@
 import React, { useContext, useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { FaStar } from "react-icons/fa";
 import { useParams } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthProvider";
+import AllReviews from "../AllReviews/AllReviews";
 
 const ServiceDetails = () => {
-  const { user } = useContext(AuthContext);
+  const { user} = useContext(AuthContext);
   const { id } = useParams();
   const [service, setService] = useState({});
+  const [reviews, setReviews] = useState([]);
+  const [datas, setDatas] = useState(null);
 
   const { img, serviceName, price, description, rating } = service;
 
@@ -15,6 +19,14 @@ const ServiceDetails = () => {
       .then((res) => res.json())
       .then((data) => setService(data));
   }, [id]);
+
+  useEffect(() => {
+    fetch("http://localhost:5000/reviews")
+      .then((res) => res.json())
+      .then((data) => {
+        setReviews(data);
+      });
+  }, [datas]);
 
   const handleReview = (e) => {
     e.preventDefault();
@@ -28,20 +40,24 @@ const ServiceDetails = () => {
       userPhoto: user?.photoURL || null,
       userMessage: text,
     };
-    console.log(review);
 
-    fetch('http://localhost:5000/reviews', {
-      method: 'POST',
+    fetch("http://localhost:5000/reviews", {
+      method: "POST",
       headers: {
-        'content-type': 'application/json'
+        "content-type": "application/json",
       },
-      body: JSON.stringify(review)
+      body: JSON.stringify(review),
     })
-    .then(res => res.json())
-    .then(data => {
-      console.log(data);
-    })
-    .catch(err => console.error(err.message));
+      .then((res) => res.json())
+      .then((data) => {
+        // console.log(data);
+        if (data?.insertedId) {
+          toast.success("Review successfully added");
+          setDatas(data.insertedId)
+        }
+      })
+      .catch((err) => console.error(err.message));
+    e.target.reset();
   };
 
   return (
@@ -89,36 +105,14 @@ const ServiceDetails = () => {
               Review
             </button>
           </form>
+         <div>
+          
+         </div>
 
-          <div className="container flex flex-col w-full max-w-lg  divide-y rounded-md divide-gray-700 bg-blue-100">
-            <div className="flex justify-between p-4">
-              <div className="flex space-x-4">
-                <div>
-                  <img
-                    src="https://source.unsplash.com/100x100/?portrait"
-                    alt=""
-                    className="object-cover w-12 h-12 rounded-full"
-                  />
-                </div>
-                <div>
-                  <h4 className="font-bold">Leroy Jenkins</h4>
-                  <span className="text-xs">2 days ago</span>
-                </div>
-              </div>
-            </div>
-            <div className="p-4 space-y-2 text-sm text-gray-600">
-              <p>
-                Vivamus sit amet turpis leo. Praesent varius eleifend elit, eu
-                dictum lectus consequat vitae. Etiam ut dolor id justo fringilla
-                finibus.
-              </p>
-              <p>
-                Donec eget ultricies diam, eu molestie arcu. Etiam nec lacus eu
-                mauris cursus venenatis. Maecenas gravida urna vitae accumsan
-                feugiat. Vestibulum commodo, ante sit urna purus rutrum sem.
-              </p>
-            </div>
-          </div>
+          {
+            reviews.map(review => <AllReviews key={review._id} review={review}/>)
+          }
+          
         </div>
       </div>
     </section>
