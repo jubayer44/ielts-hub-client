@@ -17,7 +17,7 @@ const Footer = () => {
     </div>
   </div> 
   <div>
-    <p>Copyright © 2022 - All right reserved by English Hub</p>
+    <p>Copyright © 2022 - All right reserved by IELTS Hub</p>
   </div>
 </footer>
         </div>
