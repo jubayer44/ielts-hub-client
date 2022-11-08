@@ -11,7 +11,7 @@ export const Header = () => {
             <div className="text-center text-white">
               <h1 className="text-3xl md:text-5xl mb-4 font-bold text-white">Certify your English proficiency today!</h1>
               <p>The only potential limitation to your IELTS result is your preparation. If you want to get your best score possible on this difficult exam, it’s important to take the time beforehand and fully prepare yourself.</p>
-              <button className="btn btn-success mt-4">Details</button>
+              <button className="btn btn-primary btn-sm normal-case mt-5">Details</button>
             </div>
           </div>
         </div>

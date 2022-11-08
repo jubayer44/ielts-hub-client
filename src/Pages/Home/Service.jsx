@@ -29,7 +29,7 @@ const Service = () => {
                     Filling text so you can see how it looks like with text. Did
                     I said text?
                   </p>
-                  <button className="btn btn-success btn-sm ">Details</button>
+                  <button className="btn btn-primary btn-sm normal-case">Details</button>
                 </div>
               </div>
             </div>
