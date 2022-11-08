@@ -1,21 +1,48 @@
 import React, { useContext, useEffect, useState } from "react";
+import { FaStar } from "react-icons/fa";
 import { useParams } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthProvider";
 
 const ServiceDetails = () => {
-const {user} = useContext(AuthContext);
-const {id} = useParams();
-const [service, setService] = useState({});
+  const { user } = useContext(AuthContext);
+  const { id } = useParams();
+  const [service, setService] = useState({});
 
-console.log(user);
-const {img, serviceName, price, description, rating} = service;
+  const { img, serviceName, price, description, rating } = service;
 
+  useEffect(() => {
+    fetch(`http://localhost:5000/services/${id}`)
+      .then((res) => res.json())
+      .then((data) => setService(data));
+  }, [id]);
 
-useEffect(()=> {
-  fetch(`http://localhost:5000/services/${id}`)
-  .then(res => res.json())
-  .then(data =>setService(data))
-}, [id]);
+  const handleReview = (e) => {
+    e.preventDefault();
+    const text = e.target.text.value;
+
+    const review = {
+      serviceName,
+      img,
+      price,
+      userName: user?.displayName || null,
+      userPhoto: user?.photoURL || null,
+      userMessage: text,
+    };
+    console.log(review);
+
+    fetch('http://localhost:5000/reviews', {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify(review)
+    })
+    .then(res => res.json())
+    .then(data => {
+      console.log(data);
+    })
+    .catch(err => console.error(err.message));
+  };
 
   return (
     <section className="mx-2 my-10">
@@ -30,21 +57,38 @@ useEffect(()=> {
             <h3 className="text-2xl font-semibold sm:text-4xl">
               {serviceName}
             </h3>
-            <p className="text-red-500 font-semibold font-sans">Price: $ {price}</p>
-            <p>
-              {description}
+            <p className="flex items-center font-sans font-semibold">
+              <FaStar className="mr-2 text-yellow-500" />
+              {rating}
             </p>
-            <button className="btn btn-primary normal-case">Enroll Today</button>
+            <p className="text-red-500 font-semibold font-sans">
+              Price: $ {price}
+            </p>
+            <p>{description}</p>
+            <button className="btn btn-primary normal-case">
+              Enroll Today
+            </button>
           </div>
         </div>
         <div className="border-black w-full bg-gray-400 p-[0.5px]"></div>
         <div>
           <p className="text-2xl font-bold">Review Section</p>
 
-        <div className="my-8">
-            <p><textarea className="textarea textarea-info w-full max-w-md" placeholder="write something"></textarea><br />
-            <button className="btn btn-primary btn-sm normal-case">Review</button></p>
-        </div>
+          <form onSubmit={handleReview} className="my-8">
+            <textarea
+              required
+              name="text"
+              className="textarea textarea-info w-full max-w-md"
+              placeholder="write something"
+            ></textarea>
+            <br />
+            <button
+              type="submit"
+              className="btn btn-primary btn-sm normal-case"
+            >
+              Review
+            </button>
+          </form>
 
           <div className="container flex flex-col w-full max-w-lg  divide-y rounded-md divide-gray-700 bg-blue-100">
             <div className="flex justify-between p-4">
@@ -61,7 +105,6 @@ useEffect(()=> {
                   <span className="text-xs">2 days ago</span>
                 </div>
               </div>
-              
             </div>
             <div className="p-4 space-y-2 text-sm text-gray-600">
               <p>
@@ -76,7 +119,6 @@ useEffect(()=> {
               </p>
             </div>
           </div>
-
         </div>
       </div>
     </section>
