@@ -2,40 +2,40 @@ import React, { useContext } from "react";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthProvider";
+import { FaGoogle } from "react-icons/fa";
 
 const Register = () => {
-    const {createUer, updateUser} = useContext(AuthContext);
+  const { createUer, updateUser, googleLogin } = useContext(AuthContext);
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const name = form.name.value;
+    const photoURL = form.photo.value;
+    const email = form.email.value;
+    const password = form.password.value;
 
+    createUer(email, password)
+      .then((response) => {
+        // const user = response.user;
+        toast.success("Register Successfully Complete");
+        updateUser(name, photoURL)
+          .then((response) => {
+            console.log(response?.user);
+            form.reset();
+          })
+          .catch((err) => console.error(err));
+      })
+      .catch((err) => console.log(err.message));
+  };
 
-
-
-    const handleSubmit = (event) => {
-
-        event.preventDefault();
-        const form = event.target;
-        const name = form.name.value;
-        const photoURL = form.photo.value;
-        const email = form.email.value;
-        const password = form.password.value;
-
-        createUer(email, password)
-        .then(response => {
-            // const user = response.user;
-            toast.success('Register Successfully Complete');
-            updateUser(name, photoURL)
-            .then(response => {
-                console.log(response?.user);
-                form.reset();
-            })
-            .catch(err => console.error(err));
-        })
-        .catch(err => console.log(err.message));
-        
-    };
-
-
-
+  const handleGoogleLogin = () => {
+    googleLogin()
+    .then(response => {
+      console.log(response.user)
+    })
+    .catch(err => console.log(err.message))
+  };
 
   return (
     <section className="">
@@ -45,8 +45,11 @@ const Register = () => {
             <p className="text-center font-bold text-3xl">Register</p>
             <div className="mt-6">
               <form
-              onSubmit={handleSubmit}
-               action="#" method="POST" className="space-y-6">
+                onSubmit={handleSubmit}
+                action="#"
+                method="POST"
+                className="space-y-6"
+              >
                 <div className="">
                   <div>
                     <label
@@ -157,10 +160,11 @@ const Register = () => {
               <div>
                 <button
                   type="submit"
+                  onClick={handleGoogleLogin}
                   className="w-full items-center block px-10 py-3.5 text-base font-medium text-center text-blue-600 transition duration-500 ease-in-out transform border-2 border-white shadow-md rounded-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
                 >
                   <div className="flex items-center justify-center">
-                    <span className="ml-4"> Log in with Google</span>
+                    <span className="ml-4 flex items-center"><FaGoogle className="mr-2"/> Log in with Google</span>
                   </div>
                 </button>
               </div>

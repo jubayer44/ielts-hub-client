@@ -7,7 +7,7 @@ const {user} = useContext(AuthContext);
 const {id} = useParams();
 const [service, setService] = useState({});
 
-console.log(service, user);
+console.log(user);
 const {img, serviceName, price, description, rating} = service;
 
 
@@ -39,7 +39,7 @@ useEffect(()=> {
         </div>
         <div className="border-black w-full bg-gray-400 p-[0.5px]"></div>
         <div>
-          <p>Review Section</p>
+          <p className="text-2xl font-bold">Review Section</p>
 
         <div className="my-8">
             <p><textarea className="textarea textarea-info w-full max-w-md" placeholder="write something"></textarea><br />

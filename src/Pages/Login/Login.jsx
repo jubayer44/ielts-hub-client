@@ -1,11 +1,12 @@
 import React, { useContext } from "react";
 import toast from "react-hot-toast";
+import { FaGoogle } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthProvider";
 
 const Login = () => {
   
-  const {logIn, forgetPassword} = useContext(AuthContext);
+  const {logIn, forgetPassword, googleLogin} = useContext(AuthContext);
   
   
   
@@ -27,6 +28,14 @@ const Login = () => {
 
   };
 
+  const handleGoogleLogin = () => {
+    googleLogin()
+    .then(response => {
+      console.log(response.user)
+    })
+    .catch(err => console.log(err.message))
+  };
+
   //Forget Password
   const handleForgetPassword = (event) => {
     const email = event.target.value;
@@ -36,7 +45,6 @@ const Login = () => {
         
     })
     .catch(err => console.error(err))
-    
   }
 
   return (
@@ -128,6 +136,7 @@ const Login = () => {
                 </div>
                 <div>
                   <button
+                  
                     type="submit"
                     className="flex items-center justify-center w-full px-10 py-4 text-base font-medium text-center text-white transition duration-500 ease-in-out transform bg-blue-600 rounded-xl hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                   >
@@ -148,11 +157,12 @@ const Login = () => {
               </div>
               <div>
                 <button
+                onClick={handleGoogleLogin}
                   type="submit"
                   className="w-full items-center block px-10 py-3.5 text-base font-medium text-center text-blue-600 transition duration-500 ease-in-out transform border-2 border-white shadow-md rounded-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
                 >
                   <div className="flex items-center justify-center">
-                    <span className="ml-4"> Log in with Google</span>
+                    <span className="ml-4 flex items-center"><FaGoogle className="mr-2"/> Log in with Google</span>
                   </div>
                 </button>
               </div>
