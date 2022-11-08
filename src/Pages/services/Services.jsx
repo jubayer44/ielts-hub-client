@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 const Services = () => {
-    
+    useEffect(()=> {
+        fetch('data.json')
+        .then(res => res.json())
+        .then(data => console.log(data))
+    }, [])
 
 
     return (
