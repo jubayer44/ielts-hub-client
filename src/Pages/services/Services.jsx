@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { PhotoProvider, PhotoView } from "react-photo-view";
+import { Link } from "react-router-dom";
 
 const Services = () => {
   const [services, setServices] = useState([]);
@@ -16,7 +17,7 @@ const Services = () => {
         <h1 className="text-4xl font-bold text-center">My Services</h1>
         <div className="grid max-w-lg gap-12 mx-auto mt-12 lg:grid-cols-3 lg:max-w-none">
           {services?.map((service) => {
-            const { serviceName, price, description, img } = service;
+            const { serviceName, price, description, img, _id} = service;
             return (
               <div
                 key={service._id}
@@ -43,11 +44,13 @@ const Services = () => {
                       </h3>
                       <p className="text-red-500">Price: $ {price}</p>
                       <p className="text-lg font-normal text-gray-500 pb-14">
-                        {description}
+                        {description.length > 100 ? description.slice(0, 100)+ "..." : description}
                       </p>
+                      <Link to={`/services/${_id}`}>
                       <button className="btn btn-primary normal-case absolute bottom-0 w-full">
                         Details
                       </button>
+                      </Link>
                     </div>
                   </div>
                 </div>

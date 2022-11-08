@@ -35,7 +35,7 @@ const router = createBrowserRouter([
                 element: <Register/>
             },
             {
-                path: 'serviceDetails',
+                path: '/services/:id',
                 element: <ServiceDetails/>
             }
         ]

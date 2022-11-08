@@ -1,6 +1,21 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { AuthContext } from "../../Context/AuthProvider";
 
 const ServiceDetails = () => {
+const {user} = useContext(AuthContext);
+const {id} = useParams();
+const [service, setService] = useState();
+
+console.log(service);
+
+
+useEffect(()=> {
+  fetch(`http://localhost:5000/${id}`)
+  .then(res => res.json())
+  .then(data => setService(data))
+}, [id]);
+
   return (
     <section className="mx-2 my-10">
       <div className="container bg-gray-100 rounded-md max-w-6xl p-6 mx-auto space-y-6 sm:space-y-12">
@@ -26,7 +41,7 @@ const ServiceDetails = () => {
           <p>Review Section</p>
 
         <div className="my-8">
-            <p><textarea className="textarea textarea-info" placeholder="write something"></textarea><br />
+            <p><textarea className="textarea textarea-info w-full max-w-md" placeholder="write something"></textarea><br />
             <button className="btn btn-primary btn-sm normal-case">Review</button></p>
         </div>
 
