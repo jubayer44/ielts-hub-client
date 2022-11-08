@@ -1,9 +1,9 @@
 import React from 'react';
-import Contact from '../Contact/Contact';
 import About from './About';
 import FAQ from './FAQ';
 import { Header } from './Header';
 import Service from './Service';
+import Subscribe from './Subscribe';
 
 const Home = () => {
     return (
@@ -12,7 +12,7 @@ const Home = () => {
             <Service/>
             <About/>
             <FAQ/>
-            <Contact/>
+            <Subscribe/>
         </div>
     );
 };

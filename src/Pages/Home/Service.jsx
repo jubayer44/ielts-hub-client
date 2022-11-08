@@ -11,7 +11,7 @@ const Service = () => {
               <div className="flex-shrink-0">
                 <img
                   className="object-cover w-full h-48 rounded-lg"
-                  src="/assets/images/placeholders/neon-1.jpg"
+                  src="https://coachify.co.in/wp-content/uploads/2020/08/335-Complete-English-Course-Beginner-Level.jpg"
                   alt=""
                 />
               </div>
@@ -43,7 +43,7 @@ const Service = () => {
               <div className="flex-shrink-0">
                 <img
                   className="object-cover w-full h-48 rounded-lg"
-                  src="/assets/images/placeholders/neon-2.jpg"
+                  src="https://coachify.co.in/wp-content/uploads/2020/08/335-Complete-English-Course-Beginner-Level.jpg"
                   alt=""
                 />
               </div>
@@ -75,7 +75,7 @@ const Service = () => {
               <div className="flex-shrink-0">
                 <img
                   className="object-cover w-full h-48 rounded-lg"
-                  src="/assets/images/placeholders/neon-3.jpg"
+                  src="https://i.ibb.co/sCqnSdQ/learn-english-design-vector-7178817.jpg"
                   alt=""
                 />
               </div>

@@ -66,7 +66,7 @@ export default function NavBar() {
                                 <a href="/">About US</a>
                             </li>
                             <li className="text-gray-600 hover:text-blue-600">
-                                <a href="/">Contact US</a>
+                                <a href="/contact">Contact</a>
                             </li>
                         </ul>
                     </div>
