@@ -19,13 +19,20 @@ const Login = () => {
     const email = form.email.value;
     const password = form.password.value;
 
-    logIn(email, password).then((response) => {
+    //Login User
+    logIn(email, password)
+    .then((response) => {
       // const user = response.user;
       toast.success("Login Success");
       navigate(from, { replace: true });
       form.reset();
       // console.log(user);
-    });
+    })
+    .catch((error) =>{
+      const err1 = error.message.split('/')[1]
+      const mainErr = err1.split(')')[0]
+      toast.error(mainErr)
+    })
   };
 
   const handleGoogleLogin = () => {
