@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { PhotoProvider, PhotoView } from "react-photo-view";
 import { Link } from "react-router-dom";
+import useTitle from "../../hooks/useTitle";
 
 const Services = () => {
   const [services, setServices] = useState([]);
+  useTitle('Services')
 
   useEffect(() => {
     fetch("http://localhost:5000/services")
@@ -11,8 +13,10 @@ const Services = () => {
       .then((data) => setServices(data));
   }, []);
 
+
   return (
     <section className="my-10 px-3">
+
       <div className="relative mx-auto max-w-7xl">
         <h1 className="text-4xl font-bold text-center">My Services</h1>
         <div className="grid max-w-lg gap-12 mx-auto mt-12 lg:grid-cols-3 lg:max-w-none">

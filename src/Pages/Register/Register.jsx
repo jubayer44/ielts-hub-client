@@ -3,8 +3,10 @@ import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthProvider";
 import { FaGoogle } from "react-icons/fa";
+import useTitle from "../../hooks/useTitle";
 
 const Register = () => {
+  useTitle('Register');
   const { createUer, updateUser, googleLogin } = useContext(AuthContext);
 
   const handleSubmit = (event) => {

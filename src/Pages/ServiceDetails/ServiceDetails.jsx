@@ -9,9 +9,11 @@ import {
   useParams,
 } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthProvider";
+import useTitle from "../../hooks/useTitle";
 import AllReviews from "../AllReviews/AllReviews";
 
 const ServiceDetails = () => {
+  useTitle('Service Details');
   const service = useLoaderData();
   const { user } = useContext(AuthContext);
   const { id } = useParams();

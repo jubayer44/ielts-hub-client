@@ -3,8 +3,10 @@ import toast from "react-hot-toast";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthProvider";
+import useTitle from "../../hooks/useTitle";
 
-export default function Table() {
+const MyReviews = () => {
+  useTitle('My Reviews');
   const { user } = useContext(AuthContext);
   const [reviews, setReviews] = useState([]);
   const [result, setResult] = useState(false);
@@ -157,3 +159,4 @@ export default function Table() {
     </div>
   );
 }
+export default MyReviews;

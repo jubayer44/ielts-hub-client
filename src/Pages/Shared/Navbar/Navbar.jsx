@@ -69,7 +69,7 @@ export default function NavBar() {
                 <Link to="/">Home</Link>
               </li>
               <li className="text-gray-600 hover:text-blue-600">
-                <Link to="/">Blog</Link>
+                <Link to="/blog">Blog</Link>
               </li>
               <li className="text-gray-600 hover:text-blue-600">
                 <Link to="/contact">Contact</Link>
