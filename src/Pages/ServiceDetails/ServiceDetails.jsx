@@ -57,6 +57,7 @@ const ServiceDetails = () => {
       method: "POST",
       headers: {
         "content-type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("ielts-hub-token")}`
       },
       body: JSON.stringify(review),
     })

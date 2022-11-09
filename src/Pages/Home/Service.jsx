@@ -6,18 +6,25 @@ import { Link } from "react-router-dom";
 
 const Service = () => {
   const [services, setServices] = useState([]);
+  const [loading , setLoading] = useState(true);
 
 
   useEffect(()=> {
     fetch('https://ielts-hub-server-jubayer44.vercel.app')
     .then(res => res.json())
-    .then(data => setServices(data));
+    .then(data => {
+      setServices(data);
+      setLoading(false);
+    });
   }, []);
 
 
 
   return (
     <section className="my-10 px-3">
+      {
+        !loading ? loading : <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin dark:border-violet-400 mx-auto my-10"></div>
+      }
       <div className="relative mx-auto max-w-7xl">
         <h1 className="text-4xl font-bold text-center">My Services</h1>
         <div className="grid max-w-lg gap-12 mx-auto mt-12 lg:grid-cols-3 lg:max-w-none">

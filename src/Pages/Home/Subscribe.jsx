@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Subscribe = () => {
   return (
@@ -45,9 +46,9 @@ const Subscribe = () => {
                 <div className="sm:max-w-lg sm:flex md:mx-auto">
                   <p className="mt-3 text-xs text-gray-500">
                     By subscribing, you agree with Revue's
-                    <a href="/">Terms of Service</a>
+                    <Link to="">Terms of Service</Link>
                     and
-                    <a href="/">Privacy Policy</a>.
+                    <Link to="">Privacy Policy</Link>.
                   </p>
                 </div>
               </div>

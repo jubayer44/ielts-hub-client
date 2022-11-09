@@ -6,9 +6,11 @@ import { AuthContext } from "../../Context/AuthProvider";
 import useTitle from "../../hooks/useTitle";
 
 const Login = () => {
-  useTitle('Login');
+  useTitle("Login");
   const { logIn, forgetPassword, googleLogin } = useContext(AuthContext);
   const [userMail, setUserMail] = useState("");
+  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -23,24 +25,42 @@ const Login = () => {
 
     //Login User
     logIn(email, password)
-    .then((response) => {
-      // const user = response.user;
-      toast.success("Login Success");
-      navigate(from, { replace: true });
-      form.reset();
-      // console.log(user);
-    })
-    .catch((error) =>{
-      const err1 = error.message.split('/')[1]
-      const mainErr = err1.split(')')[0]
-      toast.error(mainErr)
-    })
+      .then((response) => {
+        const user = response.user;
+        setLoading(false);
+
+        const currentUser = {
+          email: user.email,
+        };
+
+        fetch("http://localhost:5000/jwt", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(currentUser),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            localStorage.setItem("ielts-hub-token", data.token);
+            console.log(data);
+            navigate(from, { replace: true });
+          });
+
+        toast.success("Login Success");
+        // form.reset();
+      })
+      .catch((error) => {
+        const err1 = error.message.split("/")[1];
+        const mainErr = err1.split(")")[0];
+        toast.error(mainErr);
+      });
   };
 
   const handleGoogleLogin = () => {
     googleLogin()
-      .then((response) => {
-        console.log(response.user);
+      .then(() => {
+        setLoading(false);
       })
       .catch((err) => console.log(err.message));
   };
@@ -56,6 +76,11 @@ const Login = () => {
 
   return (
     <section className="">
+      {loading ? (
+        loading
+      ) : (
+        <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin dark:border-violet-400 mx-auto my-10"></div>
+      )}
       <div className=" items-center px-5 py-12 lg:px-20">
         <div className="flex flex-col w-full max-w-md p-10 mx-auto my-6 transition duration-500 ease-in-out transform bg-gray-200 rounded-lg md:mt-0">
           <div className="mt-8">

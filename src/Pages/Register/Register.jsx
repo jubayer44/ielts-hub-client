@@ -1,13 +1,17 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import toast from "react-hot-toast";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthProvider";
 import { FaGoogle } from "react-icons/fa";
 import useTitle from "../../hooks/useTitle";
 
 const Register = () => {
-  useTitle('Register');
+  useTitle("Register");
   const { createUer, updateUser, googleLogin } = useContext(AuthContext);
+  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location?.state?.from?.pathname || "/";
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -19,10 +23,29 @@ const Register = () => {
 
     createUer(email, password)
       .then((response) => {
-        // const user = response.user;
+        const user = response.user;
+        setLoading(false);
         toast.success("Register Successfully Complete");
+
         updateUser(name, photoURL)
           .then((response) => {
+            const currentUser = {
+              email: user.email,
+            };
+
+            fetch("http://localhost:5000/jwt", {
+              method: "POST",
+              headers: {
+                "content-type": "application/json",
+              },
+              body: JSON.stringify(currentUser),
+            })
+              .then((res) => res.json())
+              .then((data) => {
+                localStorage.setItem("ielts-hub-token", data.token);
+                navigate(from, { replace: true });
+              });
+
             console.log(response?.user);
             form.reset();
           })
@@ -33,14 +56,19 @@ const Register = () => {
 
   const handleGoogleLogin = () => {
     googleLogin()
-    .then(response => {
-      console.log(response.user)
-    })
-    .catch(err => console.log(err.message))
+      .then(() => {
+        setLoading(false);
+      })
+      .catch((err) => console.log(err.message));
   };
 
   return (
     <section className="">
+      {loading ? (
+        loading
+      ) : (
+        <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin dark:border-violet-400 mx-auto my-10"></div>
+      )}
       <div className=" items-center px-5 py-12 lg:px-20 ">
         <div className="flex flex-col w-full max-w-md p-10 mx-auto my-6 transition duration-500 ease-in-out transform bg-gray-200 rounded-lg md:mt-0">
           <div className="mt-8">
@@ -166,7 +194,9 @@ const Register = () => {
                   className="w-full items-center block px-10 py-3.5 text-base font-medium text-center text-blue-600 transition duration-500 ease-in-out transform border-2 border-white shadow-md rounded-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
                 >
                   <div className="flex items-center justify-center">
-                    <span className="ml-4 flex items-center"><FaGoogle className="mr-2"/> Log in with Google</span>
+                    <span className="ml-4 flex items-center">
+                      <FaGoogle className="mr-2" /> Log in with Google
+                    </span>
                   </div>
                 </button>
               </div>

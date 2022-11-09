@@ -15,7 +15,8 @@ const UpdateReview = () => {
 
     fetch(`http://localhost:5000/reviews/${_id}`, {
       method: "PATCH",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json",
+      authorization: `Bearer ${localStorage.getItem("ielts-hub-token")}` },
       body: JSON.stringify({ text }),
     })
       .then((res) => res.json())
