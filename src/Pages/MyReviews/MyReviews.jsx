@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
+import { Link } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthProvider";
 
 export default function Table() {
@@ -21,11 +22,12 @@ export default function Table() {
       .catch((err) => console.log(err));
   }, [user?.email, result]);
 
+
+  //Review Delete 
   const handleDelete = (id) => {
     const process =  window.confirm('Are you sure you want to delete');
 
     if (process){
-
       fetch(`http://localhost:5000/reviews/${id}`, {
         method: "DELETE",
       })
@@ -61,11 +63,12 @@ export default function Table() {
                     <span className="text-gray-500">{rvw.userMessage}</span>
                   </p>
                   <div className="flex justify-evenly mt-3">
-                    <p className="text-green-500 hover:text-green-700 flex items-center border-2 px-2 rounded-md cursor-pointer">
+                    <Link to={`/update/${rvw._id}`}
+                    className="text-green-500 hover:text-green-700 flex items-center border-2 px-2 rounded-md cursor-pointer">
                       <FaEdit className="mr-1" /> Edit
-                    </p>
+                    </Link>
                     <p
-                      onClick={handleDelete}
+                      onClick={()=>handleDelete(rvw._id)}
                       className="text-red-500 hover:text-red-700 flex items-center border-2 px-2 rounded-md cursor-pointer"
                     >
                       <FaTrashAlt className="mr-1" /> Delete
@@ -122,9 +125,11 @@ export default function Table() {
                               {rev.userMessage}
                             </td>
                             <td className="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
-                              <p className="text-green-500 hover:text-green-700 flex justify-end items-center cursor-pointer">
+                              <Link to={`/update/${rev._id}`}
+                              
+                              className="text-green-500 hover:text-green-700 flex justify-end items-center cursor-pointer">
                                 <FaEdit className="mr-1" /> Edit
-                              </p>
+                              </Link>
                             </td>
                             <td className="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
                               <p
