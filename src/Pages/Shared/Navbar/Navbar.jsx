@@ -11,8 +11,6 @@ export default function NavBar() {
       .then(() => {})
       .catch((err) => console.error(err));
   };
-  
-  
 
   return (
     <nav className="w-full bg-white shadow">
@@ -78,19 +76,18 @@ export default function NavBar() {
               </li>
 
               {user ? (
-                
                 <>
-                <li className="text-gray-600 hover:text-blue-600">
-                <Link to="/contact">My Review</Link>
-              </li>
-              <li className="text-gray-600 hover:text-blue-600">
-                <Link to="/contact">Add Service</Link>
-              </li>
-                <li className="text-gray-600 hover:text-blue-600">
-                  <Link onClick={handleLogOut} to="/login">
-                    Log Out
-                  </Link>
-                </li>
+                  <li className="text-gray-600 hover:text-blue-600">
+                    <Link to="/my-reviews">My Review</Link>
+                  </li>
+                  <li className="text-gray-600 hover:text-blue-600">
+                    <Link to="/add-service">Add Service</Link>
+                  </li>
+                  <li className="text-gray-600 hover:text-blue-600">
+                    <Link onClick={handleLogOut} to="/login">
+                      Log Out
+                    </Link>
+                  </li>
                 </>
               ) : (
                 <li className="text-gray-600 hover:text-blue-600">

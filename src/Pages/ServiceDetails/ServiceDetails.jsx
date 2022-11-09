@@ -1,13 +1,19 @@
 import React, { useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { FaStar } from "react-icons/fa";
-import { Link, useLoaderData, useLocation, useNavigate, useParams } from "react-router-dom";
+import {
+  Link,
+  useLoaderData,
+  useLocation,
+  useNavigate,
+  useParams,
+} from "react-router-dom";
 import { AuthContext } from "../../Context/AuthProvider";
 import AllReviews from "../AllReviews/AllReviews";
 
 const ServiceDetails = () => {
-  const service = useLoaderData()
-  const { user} = useContext(AuthContext);
+  const service = useLoaderData();
+  const { user } = useContext(AuthContext);
   const { id } = useParams();
   const [reviews, setReviews] = useState([]);
   const [datas, setDatas] = useState(null);
@@ -17,8 +23,6 @@ const ServiceDetails = () => {
   const from = location?.state?.from?.pathname;
 
   const { img, serviceName, price, description, rating } = service;
-
-
 
   useEffect(() => {
     fetch(`http://localhost:5000/reviews/${id}`)
@@ -32,8 +36,8 @@ const ServiceDetails = () => {
     e.preventDefault();
     const text = e.target.text.value;
 
-    if(!user){
-      return toast.error('Please Login')
+    if (!user) {
+      return toast.error("Please Login");
     }
 
     const review = {
@@ -56,10 +60,9 @@ const ServiceDetails = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        
         if (data?.insertedId) {
           toast.success("Review successfully added");
-          setDatas(data.insertedId)
+          setDatas(data.insertedId);
           navigate(from, { replace: true });
         }
       })
@@ -112,14 +115,19 @@ const ServiceDetails = () => {
               Review
             </button>
           </form>
-          {
-            user ? null : <h2 className="font-semibold my-8">Please <Link to='/login' className='text-blue-600'><b>Login</b> </Link> to add a review.</h2>
-          }
+          {user ? null : (
+            <h2 className="font-semibold my-8">
+              Please{" "}
+              <Link to="/login" className="text-blue-600">
+                <b>Login</b>{" "}
+              </Link>{" "}
+              to add a review.
+            </h2>
+          )}
 
-          {
-            reviews.map(review => <AllReviews key={review._id} review={review}/>)
-          }
-          
+          {reviews.map((review) => (
+            <AllReviews key={review._id} review={review} />
+          ))}
         </div>
       </div>
     </section>
