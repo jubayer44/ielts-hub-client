@@ -78,11 +78,20 @@ export default function NavBar() {
               </li>
 
               {user ? (
+                
+                <>
+                <li className="text-gray-600 hover:text-blue-600">
+                <Link to="/contact">My Review</Link>
+              </li>
+              <li className="text-gray-600 hover:text-blue-600">
+                <Link to="/contact">Add Service</Link>
+              </li>
                 <li className="text-gray-600 hover:text-blue-600">
                   <Link onClick={handleLogOut} to="/login">
                     Log Out
                   </Link>
                 </li>
+                </>
               ) : (
                 <li className="text-gray-600 hover:text-blue-600">
                   <Link to="/login">Login</Link>

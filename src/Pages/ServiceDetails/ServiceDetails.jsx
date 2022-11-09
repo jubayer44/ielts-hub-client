@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { FaStar } from "react-icons/fa";
-import { Link, useLoaderData, useParams } from "react-router-dom";
+import { Link, useLoaderData, useLocation, useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthProvider";
 import AllReviews from "../AllReviews/AllReviews";
 
@@ -11,6 +11,10 @@ const ServiceDetails = () => {
   const { id } = useParams();
   const [reviews, setReviews] = useState([]);
   const [datas, setDatas] = useState(null);
+
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location?.state?.from?.pathname;
 
   const { img, serviceName, price, description, rating } = service;
 
@@ -27,6 +31,10 @@ const ServiceDetails = () => {
   const handleReview = (e) => {
     e.preventDefault();
     const text = e.target.text.value;
+
+    if(!user){
+      return toast.error('Please Login')
+    }
 
     const review = {
       serviceName,
@@ -52,6 +60,7 @@ const ServiceDetails = () => {
         if (data?.insertedId) {
           toast.success("Review successfully added");
           setDatas(data.insertedId)
+          navigate(from, { replace: true });
         }
       })
       .catch((err) => console.error(err.message));
@@ -88,28 +97,24 @@ const ServiceDetails = () => {
         <div>
           <p className="text-2xl font-bold">Review Section</p>
 
-    {
-      user ? <form onSubmit={handleReview} className="my-8">
-      <textarea
-        required
-        name="text"
-        className="textarea textarea-info w-full max-w-md"
-        placeholder="write something"
-      ></textarea>
-      <br />
-      <button
-        type="submit"
-        className="btn btn-primary btn-sm normal-case"
-      >
-        Review
-      </button>
-    </form> : <h2 className="font-semibold my-8">Please <Link to='/login' className='text-blue-600'><b>Login</b> </Link> to add a review.</h2>
-    }
-
-          
-         <div>
-          
-         </div>
+          <form onSubmit={handleReview} className="my-8">
+            <textarea
+              required
+              name="text"
+              className="textarea textarea-info w-full max-w-md"
+              placeholder="write something"
+            ></textarea>
+            <br />
+            <button
+              type="submit"
+              className="btn btn-primary btn-sm normal-case"
+            >
+              Review
+            </button>
+          </form>
+          {
+            user ? null : <h2 className="font-semibold my-8">Please <Link to='/login' className='text-blue-600'><b>Login</b> </Link> to add a review.</h2>
+          }
 
           {
             reviews.map(review => <AllReviews key={review._id} review={review}/>)
