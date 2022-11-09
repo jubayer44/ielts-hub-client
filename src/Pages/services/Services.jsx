@@ -39,11 +39,11 @@ const Services = () => {
                 <div className="flex flex-col justify-between flex-1 relative">
                   <div className="flex-1">
                     <div className="block mt-2 space-y-6">
-                      <h3 className="text-2xl font-semibold leading-none tracking-tighter text-neutral-600 mt-5">
+                      <h3 className="text-2xl font-semibold leading-none tracking-tighter text-neutral-600 mt-5 break-words">
                         {serviceName}
                       </h3>
                       <p className="text-red-500">Price: $ {price}</p>
-                      <p className="text-lg font-normal text-gray-500 pb-14">
+                      <p className="text-lg font-normal text-gray-500 pb-14 break-words font-sans">
                         {description.length > 100 ? description.slice(0, 100)+ "..." : description}
                       </p>
                       <Link to={`/services/${_id}`}>

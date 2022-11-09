@@ -80,7 +80,7 @@ const ServiceDetails = () => {
             className="object-cover w-full h-64 rounded sm:h-96 lg:col-span-6 bg-gray-500"
           />
           <div className="p-6 space-y-2 lg:col-span-6">
-            <h3 className="text-2xl font-semibold sm:text-4xl">
+            <h3 className="text-2xl font-semibold sm:text-4xl break-words">
               {serviceName}
             </h3>
             <p className="flex items-center font-sans font-semibold">
@@ -90,7 +90,7 @@ const ServiceDetails = () => {
             <p className="text-red-500 font-semibold font-sans">
               Price: $ {price}
             </p>
-            <p>{description}</p>
+            <p className="break-words font-sans">{description}</p>
             <button className="btn btn-primary normal-case">
               Enroll Today
             </button>
