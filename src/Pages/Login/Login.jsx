@@ -1,53 +1,49 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import toast from "react-hot-toast";
 import { FaGoogle } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthProvider";
 
-const Login = () => {  
-  const {logIn, forgetPassword, googleLogin} = useContext(AuthContext);
-  
+const Login = () => {
+  const { logIn, forgetPassword, googleLogin } = useContext(AuthContext);
+  const [userMail, setUserMail] = useState("");
+
   const navigate = useNavigate();
   const location = useLocation();
   const from = location?.state?.from?.pathname || "/";
-  
-  
-    const handleSubmit = (event) => {
+
+  const handleSubmit = (event) => {
     event.preventDefault();
 
     const form = event.target;
     const email = form.email.value;
     const password = form.password.value;
-    
-    logIn(email, password)
-    .then(response => {
-        // const user = response.user;
-        toast.success('Login Success')
-        navigate(from, { replace: true });
-        form.reset();
-        // console.log(user);
-    })
 
+    logIn(email, password).then((response) => {
+      // const user = response.user;
+      toast.success("Login Success");
+      navigate(from, { replace: true });
+      form.reset();
+      // console.log(user);
+    });
   };
 
   const handleGoogleLogin = () => {
     googleLogin()
-    .then(response => {
-      console.log(response.user)
-    })
-    .catch(err => console.log(err.message))
+      .then((response) => {
+        console.log(response.user);
+      })
+      .catch((err) => console.log(err.message));
   };
 
   //Forget Password
-  const handleForgetPassword = (event) => {
-    const email = event.target.value;
-    forgetPassword(email)
-    .then((res) =>{
-        toast.success('Password Reset Successfully, Please Check your email')
-        
-    })
-    .catch(err => console.error(err))
-  }
+  const handleForgetPassword = () => {
+    forgetPassword(userMail)
+      .then(() => {
+        toast.success("Password Reset Successfully, Please Check your email");
+      })
+      .catch((err) => console.error(err));
+  };
 
   return (
     <section className="">
@@ -73,7 +69,7 @@ const Login = () => {
                     </label>
                     <div className="mt-1">
                       <input
-                      onBlur={handleForgetPassword}
+                        onChange={(e) => setUserMail(e.target.value)}
                         id="email"
                         name="email"
                         type="email"
@@ -126,8 +122,8 @@ const Login = () => {
                     </label>
                   </div>
                   <div className="text-sm">
-                    <Link 
-                    
+                    <Link
+                      onClick={handleForgetPassword}
                       to=""
                       className="font-medium text-blue-600 hover:text-blue-500"
                     >
@@ -138,7 +134,6 @@ const Login = () => {
                 </div>
                 <div>
                   <button
-                  
                     type="submit"
                     className="flex items-center justify-center w-full px-10 py-4 text-base font-medium text-center text-white transition duration-500 ease-in-out transform bg-blue-600 rounded-xl hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                   >
@@ -159,12 +154,14 @@ const Login = () => {
               </div>
               <div>
                 <button
-                onClick={handleGoogleLogin}
+                  onClick={handleGoogleLogin}
                   type="submit"
                   className="w-full items-center block px-10 py-3.5 text-base font-medium text-center text-blue-600 transition duration-500 ease-in-out transform border-2 border-white shadow-md rounded-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
                 >
                   <div className="flex items-center justify-center">
-                    <span className="ml-4 flex items-center"><FaGoogle className="mr-2"/> Log in with Google</span>
+                    <span className="ml-4 flex items-center">
+                      <FaGoogle className="mr-2" /> Log in with Google
+                    </span>
                   </div>
                 </button>
               </div>
