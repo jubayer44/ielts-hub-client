@@ -1,14 +1,15 @@
 import React, { useContext } from "react";
 import toast from "react-hot-toast";
 import { FaGoogle } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthProvider";
 
-const Login = () => {
-  
+const Login = () => {  
   const {logIn, forgetPassword, googleLogin} = useContext(AuthContext);
   
-  
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location?.state?.from?.pathname || "/";
   
   
     const handleSubmit = (event) => {
@@ -20,10 +21,11 @@ const Login = () => {
     
     logIn(email, password)
     .then(response => {
-        const user = response.user;
+        // const user = response.user;
         toast.success('Login Success')
+        navigate(from, { replace: true });
         form.reset();
-        console.log(user);
+        // console.log(user);
     })
 
   };

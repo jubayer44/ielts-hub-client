@@ -25,21 +25,25 @@ const AuthProvider = ({ children }) => {
 
   //Google Login
   const googleLogin = () => {
+    setLoading(false);
     return signInWithPopup(auth, googleProvider);
   };
 
   //Sign Up user
   const createUer = (email, password) => {
+    setLoading(false);
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
   //Sign In user
   const logIn = (email, password) => {
+    setLoading(false);
     return signInWithEmailAndPassword(auth, email, password);
   };
 
   //Update User
   const updateUser = (name, photo) => {
+    setLoading(false);
     return updateProfile(auth.currentUser, {
       displayName: name,
       photoURL: photo,
@@ -48,6 +52,7 @@ const AuthProvider = ({ children }) => {
 
   //Forget Password
   const forgetPassword = (email) => {
+    setLoading(false);
     return sendPasswordResetEmail(auth, email);
   };
 
