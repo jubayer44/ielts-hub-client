@@ -1,32 +1,28 @@
 import React, { useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { FaStar } from "react-icons/fa";
-import { useParams } from "react-router-dom";
+import { useLoaderData, useParams } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthProvider";
 import AllReviews from "../AllReviews/AllReviews";
 
 const ServiceDetails = () => {
+  const service = useLoaderData()
   const { user} = useContext(AuthContext);
   const { id } = useParams();
-  const [service, setService] = useState({});
   const [reviews, setReviews] = useState([]);
   const [datas, setDatas] = useState(null);
 
   const { img, serviceName, price, description, rating } = service;
 
-  useEffect(() => {
-    fetch(`http://localhost:5000/services/${id}`)
-      .then((res) => res.json())
-      .then((data) => setService(data));
-  }, [id]);
+
 
   useEffect(() => {
-    fetch("http://localhost:5000/reviews")
+    fetch(`http://localhost:5000/reviews/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setReviews(data);
       });
-  }, [datas]);
+  }, [datas, id]);
 
   const handleReview = (e) => {
     e.preventDefault();
@@ -36,12 +32,14 @@ const ServiceDetails = () => {
       serviceName,
       img,
       price,
+      serviceId: id,
+      userEmail: user?.email || null,
       userName: user?.displayName || null,
       userPhoto: user?.photoURL || null,
       userMessage: text,
     };
 
-    fetch("http://localhost:5000/reviews", {
+    fetch(`http://localhost:5000/reviews`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -50,7 +48,7 @@ const ServiceDetails = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        // console.log(data);
+        
         if (data?.insertedId) {
           toast.success("Review successfully added");
           setDatas(data.insertedId)
