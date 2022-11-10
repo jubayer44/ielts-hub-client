@@ -11,7 +11,6 @@ const Login = () => {
   const { logIn, forgetPassword, googleLogin } = useContext(AuthContext);
   const [userMail, setUserMail] = useState("");
   const [loading, setLoading] = useState(true);
-  // const [loading, setLoading] = useState(true);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -34,13 +33,13 @@ const Login = () => {
 
         navigate(from, { replace: true });
         toast.success("Login Success");
-        form.reset();
       })
       .catch((error) => {
         const err1 = error.message.split("/")[1];
         const mainErr = err1.split(")")[0];
         toast.error(mainErr);
       });
+    form.reset();
   };
 
   const handleGoogleLogin = () => {

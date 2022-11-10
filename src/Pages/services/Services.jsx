@@ -6,23 +6,31 @@ import useTitle from "../../hooks/useTitle";
 const Services = () => {
   const [services, setServices] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [count, setCount] = useState([]);
+  const [page, setPage] = useState(0);
+  const size = 9;
   useTitle("Services");
 
   useEffect(() => {
-    fetch("https://ielts-hub-server-jubayer44.vercel.app/services")
+    fetch(
+      `https://ielts-hub-server-jubayer44.vercel.app/services?page=${page}&size=${size}`
+    )
       .then((res) => res.json())
       .then((data) => {
-        setServices(data);
+        setServices(data.services);
+        setCount(data.count);
         setLoading(false);
       });
-  }, []);
+  }, [page, size]);
+
+  const pages = Math.ceil(count / size);
 
   return (
     <section className="my-10 px-3">
       {!loading ? (
         loading
       ) : (
-        <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin dark:border-violet-400 mx-auto my-10"></div>
+        <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-violet-400 mx-auto my-10"></div>
       )}
       <div className="relative mx-auto max-w-7xl">
         <h1 className="text-4xl font-bold text-center">My Services</h1>
@@ -54,7 +62,7 @@ const Services = () => {
                         {serviceName}
                       </h3>
                       <p className="text-red-500">Price: $ {price}</p>
-                      <p className="text-lg font-normal text-gray-500 pb-14 break-words font-sans">
+                      <p className="text-lg font-normal pb-14 break-words font-sans">
                         {description.length > 100
                           ? description.slice(0, 100) + "..."
                           : description}
@@ -70,6 +78,21 @@ const Services = () => {
               </div>
             );
           })}
+        </div>
+        <div className="flex justify-center space-x-1">
+          {[...Array(pages).keys()].map((num) => (
+            <button
+              key={num}
+              onClick={() => setPage(num)}
+              type="button"
+              title="Page 1"
+              className={`btn bg-white text-black ${
+                page === num && "bg-gray-300"
+              }`}
+            >
+              {num + 1}
+            </button>
+          ))}
         </div>
       </div>
     </section>

@@ -30,7 +30,7 @@ const Register = () => {
         toast.success("Register Successfully Complete");
 
         updateUser(name, photoURL)
-          .then((response) => {
+          .then(() => {
             const currentUser = {
               email: user.email,
             };
@@ -54,6 +54,7 @@ const Register = () => {
           .catch((err) => console.error(err));
       })
       .catch((err) => console.log(err.message));
+    form.reset();
   };
 
   const handleGoogleLogin = () => {

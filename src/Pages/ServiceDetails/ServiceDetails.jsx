@@ -14,7 +14,7 @@ import AllReviews from "../AllReviews/AllReviews";
 
 const ServiceDetails = () => {
   useTitle("Service Details");
-  const service = useLoaderData();
+  const { img, serviceName, price, description, rating } = useLoaderData();
   const { user } = useContext(AuthContext);
   const { id } = useParams();
   const [reviews, setReviews] = useState([]);
@@ -22,7 +22,6 @@ const ServiceDetails = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const from = location?.state?.from?.pathname;
-  const { img, serviceName, price, description, rating } = service;
 
   const d = new Date();
   const date = d.getDate() + "/" + (d.getMonth() + 1) + "/" + d.getFullYear();
