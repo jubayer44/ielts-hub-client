@@ -7,7 +7,6 @@ const Services = () => {
   const [services, setServices] = useState([]);
   const [loading, setLoading ] = useState(true);
   useTitle("Services");
-  console.log(loading);
 
   useEffect(() => {
     fetch("http://localhost:5000/services")

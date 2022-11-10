@@ -1,8 +1,10 @@
 import React from "react";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 import useTitle from "../../hooks/useTitle";
 
 const AddService = () => {
+  const navigate = useNavigate();
     useTitle('Add Service');
 const handleSubmit = (event) => {
     event.preventDefault();
@@ -17,6 +19,7 @@ const handleSubmit = (event) => {
         method: 'POST',
         headers: {
             'content-type': 'application/json',
+            authorization: `Bearer ${localStorage.getItem("ielts-hub-token")}`
         },
         body: JSON.stringify({serviceName, price, description, img, rating})
     })
@@ -24,6 +27,7 @@ const handleSubmit = (event) => {
     .then(data => {
         if(data.insertedId){
             toast.success('Successfully added a service')
+            navigate('/services')
         }
     })
 };
@@ -47,7 +51,7 @@ const handleSubmit = (event) => {
             required
             name="name"
             placeholder="service name"
-            className="input input-bordered input-accent w-full max-w-xs mb-4"
+            className="input input-bordered input-accent w-full max-w-xs mb-4 text-md font-sans"
           />{" "}
           <br />
           <label htmlFor="name">Price</label> <br />
@@ -56,7 +60,7 @@ const handleSubmit = (event) => {
             required
             name="price"
             placeholder="price"
-            className="input input-bordered input-accent w-full max-w-xs mb-4"
+            className="input input-bordered input-accent w-full max-w-xs mb-4 text-md font-sans"
           />{" "}
           <br />
           <label htmlFor="name">Image Url</label> <br />
@@ -64,14 +68,14 @@ const handleSubmit = (event) => {
             type="text"
             name="imgUrl"
             placeholder="image url"
-            className="input input-bordered input-accent w-full max-w-xs mb-4"
+            className="input input-bordered input-accent w-full max-w-xs mb-4 text-md font-sans"
           />{" "}
           <br />
           <label htmlFor="name">Description</label> <br />
           <textarea
             required
             name="description"
-            className="textarea textarea-info w-full max-w-xs"
+            className="textarea textarea-info w-full max-w-xs text-lg font-sans"
             placeholder="write something"
           ></textarea> <br />
           <button className="btn btn-primary">Submit</button>

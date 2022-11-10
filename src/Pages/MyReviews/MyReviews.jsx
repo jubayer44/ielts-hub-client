@@ -11,7 +11,6 @@ const MyReviews = () => {
   const [reviews, setReviews] = useState([]);
   const [result, setResult] = useState(false);
   const [loading, setLoading] = useState(true);
-  //   console.log(user);
 
   useEffect(() => {
     fetch(`http://localhost:5000/my-reviews?email=${user?.email}`, {
@@ -27,7 +26,7 @@ const MyReviews = () => {
         return res.json();
       })
       .then((data) => {
-        setLoading(false)
+        setLoading(false);
         setReviews(data);
         if (data.length) {
           setResult(true);
@@ -60,9 +59,11 @@ const MyReviews = () => {
 
   return (
     <div>
-      {
-        !loading ? loading : <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin dark:border-violet-400 mx-auto my-10"></div>
-      }
+      {!loading ? (
+        loading
+      ) : (
+        <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin dark:border-violet-400 mx-auto my-10"></div>
+      )}
       <h2 className="text-2xl font-bold text-center mt-4">My Reviews</h2>
       {result ? (
         <div>

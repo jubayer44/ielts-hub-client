@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthProvider";
 import { FaGoogle } from "react-icons/fa";
 import useTitle from "../../hooks/useTitle";
+import { setAuthToken } from "../../api/auth";
 
 const Register = () => {
   useTitle("Register");
@@ -25,6 +26,7 @@ const Register = () => {
       .then((response) => {
         const user = response.user;
         setLoading(false);
+        setAuthToken(user)
         toast.success("Register Successfully Complete");
 
         updateUser(name, photoURL)
@@ -45,8 +47,9 @@ const Register = () => {
                 localStorage.setItem("ielts-hub-token", data.token);
                 navigate(from, { replace: true });
               });
+              navigate(from, { replace: true });
 
-            console.log(response?.user);
+
             form.reset();
           })
           .catch((err) => console.error(err));
@@ -56,8 +59,11 @@ const Register = () => {
 
   const handleGoogleLogin = () => {
     googleLogin()
-      .then(() => {
+      .then((res) => {
+        const user = res.user;
         setLoading(false);
+        setAuthToken(user)
+        navigate(from, { replace: true });
       })
       .catch((err) => console.log(err.message));
   };

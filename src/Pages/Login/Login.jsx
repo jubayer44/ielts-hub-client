@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import toast from "react-hot-toast";
 import { FaGoogle } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { setAuthToken } from "../../api/auth";
 import { AuthContext } from "../../Context/AuthProvider";
 import useTitle from "../../hooks/useTitle";
 
@@ -29,26 +30,11 @@ const Login = () => {
         const user = response.user;
         setLoading(false);
 
-        const currentUser = {
-          email: user.email,
-        };
-
-        fetch("http://localhost:5000/jwt", {
-          method: "POST",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify(currentUser),
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            localStorage.setItem("ielts-hub-token", data.token);
-            console.log(data);
-            navigate(from, { replace: true });
-          });
-
-        toast.success("Login Success");
-        // form.reset();
+        setAuthToken(user)
+          
+          navigate(from, { replace: true });
+          toast.success("Login Success");
+          form.reset();
       })
       .catch((error) => {
         const err1 = error.message.split("/")[1];
@@ -59,8 +45,10 @@ const Login = () => {
 
   const handleGoogleLogin = () => {
     googleLogin()
-      .then(() => {
+      .then((res) => {
         setLoading(false);
+        setAuthToken(res.user)
+        navigate(from, { replace: true });
       })
       .catch((err) => console.log(err.message));
   };
