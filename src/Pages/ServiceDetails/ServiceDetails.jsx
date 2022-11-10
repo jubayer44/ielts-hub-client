@@ -13,7 +13,7 @@ import useTitle from "../../hooks/useTitle";
 import AllReviews from "../AllReviews/AllReviews";
 
 const ServiceDetails = () => {
-  useTitle('Service Details');
+  useTitle("Service Details");
   const service = useLoaderData();
   const { user } = useContext(AuthContext);
   const { id } = useParams();
@@ -25,10 +25,10 @@ const ServiceDetails = () => {
   const { img, serviceName, price, description, rating } = service;
 
   const d = new Date();
-  const date = d.getDate() + '/' + (d.getMonth() + 1) + '/' + d.getFullYear();
-  const time = d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
+  const date = d.getDate() + "/" + (d.getMonth() + 1) + "/" + d.getFullYear();
+  const time = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
 
-  const addTime = {date, time}
+  const addTime = { date, time };
 
   useEffect(() => {
     fetch(`http://localhost:5000/reviews/${id}`)
@@ -55,14 +55,14 @@ const ServiceDetails = () => {
       userName: user?.displayName || null,
       userPhoto: user?.photoURL || null,
       userMessage: text,
-      addTime
+      addTime,
     };
 
     fetch(`http://localhost:5000/reviews`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
-        authorization: `Bearer ${localStorage.getItem("ielts-hub-token")}`
+        authorization: `Bearer ${localStorage.getItem("ielts-hub-token")}`,
       },
       body: JSON.stringify(review),
     })

@@ -6,6 +6,12 @@ import useTitle from "../../hooks/useTitle";
 const AddService = () => {
   const navigate = useNavigate();
     useTitle('Add Service');
+
+    const d = new Date();
+  const date = d.getDate() + '/' + (d.getMonth() + 1) + '/' + d.getFullYear();
+  const time = d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
+  const addTime = {date, time}
+
 const handleSubmit = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -21,7 +27,7 @@ const handleSubmit = (event) => {
             'content-type': 'application/json',
             authorization: `Bearer ${localStorage.getItem("ielts-hub-token")}`
         },
-        body: JSON.stringify({serviceName, price, description, img, rating})
+        body: JSON.stringify({serviceName, price, description, img, rating, addTime})
     })
     .then(res => res.json())
     .then(data => {

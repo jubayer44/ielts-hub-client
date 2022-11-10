@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { AuthContext } from "../../../Context/AuthProvider";
 
 export default function NavBar() {
@@ -17,9 +17,9 @@ export default function NavBar() {
       <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
         <div>
           <div className="flex items-center justify-between py-3 md:py-5 md:block">
-            <Link to="/">
-              <h2 className="text-2xl font-bold">IELTS Hub</h2>
-            </Link>
+            <div>
+              <h2 className="text-2xl font-bold font-mono text-violet-600">IELTS Hub</h2>
+            </div>
             <div className="md:hidden">
               <button
                 className="p-2 text-gray-700 rounded-md outline-none focus:border-gray-400 focus:border"
@@ -66,32 +66,32 @@ export default function NavBar() {
           >
             <ul className="items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0">
               <li className="text-gray-600 hover:text-blue-600">
-                <Link to="/">Home</Link>
+                <NavLink className={({isActive }) => isActive ? 'underline decoration-2' : null} to="/">Home</NavLink>
               </li>
               <li className="text-gray-600 hover:text-blue-600">
-                <Link to="/blog">Blog</Link>
+                <NavLink className={({isActive }) => isActive ? 'underline decoration-2' : null} to="/blog">Blog</NavLink>
               </li>
               <li className="text-gray-600 hover:text-blue-600">
-                <Link to="/contact">Contact</Link>
+                <NavLink className={({isActive }) => isActive ? 'underline decoration-2' : null} to="/contact">Contact</NavLink>
               </li>
 
               {user ? (
                 <>
                   <li className="text-gray-600 hover:text-blue-600">
-                    <Link to="/my-reviews">My Review</Link>
+                    <NavLink className={({isActive }) => isActive ? 'underline decoration-2' : null} to="/my-reviews">My Review</NavLink>
                   </li>
                   <li className="text-gray-600 hover:text-blue-600">
-                    <Link to="/add-service">Add Service</Link>
+                    <NavLink className={({isActive }) => isActive ? 'underline decoration-2' : null} to="/add-service">Add Service</NavLink>
                   </li>
                   <li className="text-gray-600 hover:text-blue-600">
-                    <Link onClick={handleLogOut} to="/login">
+                    <NavLink onClick={handleLogOut} className={({isActive }) => isActive ? 'underline decoration-2' : null} to="/login">
                       Log Out
-                    </Link>
+                    </NavLink>
                   </li>
                 </>
               ) : (
                 <li className="text-gray-600 hover:text-blue-600">
-                  <Link to="/login">Login</Link>
+                  <NavLink className={({isActive }) => isActive ? 'underline decoration-2' : null} to="/login">Login</NavLink>
                 </li>
               )}
               <li className="">

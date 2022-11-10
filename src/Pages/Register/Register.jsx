@@ -26,7 +26,7 @@ const Register = () => {
       .then((response) => {
         const user = response.user;
         setLoading(false);
-        setAuthToken(user)
+        setAuthToken(user);
         toast.success("Register Successfully Complete");
 
         updateUser(name, photoURL)
@@ -47,8 +47,7 @@ const Register = () => {
                 localStorage.setItem("ielts-hub-token", data.token);
                 navigate(from, { replace: true });
               });
-              navigate(from, { replace: true });
-
+            navigate(from, { replace: true });
 
             form.reset();
           })
@@ -62,7 +61,7 @@ const Register = () => {
       .then((res) => {
         const user = res.user;
         setLoading(false);
-        setAuthToken(user)
+        setAuthToken(user);
         navigate(from, { replace: true });
       })
       .catch((err) => console.log(err.message));

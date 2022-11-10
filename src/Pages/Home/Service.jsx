@@ -10,7 +10,7 @@ const Service = () => {
 
 
   useEffect(()=> {
-    fetch('https://ielts-hub-server-jubayer44.vercel.app')
+    fetch('http://localhost:5000/')
     .then(res => res.json())
     .then(data => {
       setServices(data);

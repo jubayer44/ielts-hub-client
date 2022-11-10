@@ -30,11 +30,11 @@ const Login = () => {
         const user = response.user;
         setLoading(false);
 
-        setAuthToken(user)
-          
-          navigate(from, { replace: true });
-          toast.success("Login Success");
-          form.reset();
+        setAuthToken(user);
+
+        navigate(from, { replace: true });
+        toast.success("Login Success");
+        form.reset();
       })
       .catch((error) => {
         const err1 = error.message.split("/")[1];
@@ -46,8 +46,10 @@ const Login = () => {
   const handleGoogleLogin = () => {
     googleLogin()
       .then((res) => {
+        const user = res.user;
         setLoading(false);
-        setAuthToken(res.user)
+        setAuthToken(user);
+        toast.success("Login Success");
         navigate(from, { replace: true });
       })
       .catch((err) => console.log(err.message));
