@@ -19,12 +19,16 @@ const ServiceDetails = () => {
   const { id } = useParams();
   const [reviews, setReviews] = useState([]);
   const [datas, setDatas] = useState(null);
-
   const navigate = useNavigate();
   const location = useLocation();
   const from = location?.state?.from?.pathname;
-
   const { img, serviceName, price, description, rating } = service;
+
+  const d = new Date();
+  const date = d.getDate() + '/' + (d.getMonth() + 1) + '/' + d.getFullYear();
+  const time = d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
+
+  const addTime = {date, time}
 
   useEffect(() => {
     fetch(`http://localhost:5000/reviews/${id}`)
@@ -51,6 +55,7 @@ const ServiceDetails = () => {
       userName: user?.displayName || null,
       userPhoto: user?.photoURL || null,
       userMessage: text,
+      addTime
     };
 
     fetch(`http://localhost:5000/reviews`, {
