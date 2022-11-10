@@ -5,14 +5,14 @@ import useTitle from "../../hooks/useTitle";
 
 const AddService = () => {
   const navigate = useNavigate();
-    useTitle('Add Service');
+  useTitle("Add Service");
 
-    const d = new Date();
-  const date = d.getDate() + '/' + (d.getMonth() + 1) + '/' + d.getFullYear();
-  const time = d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
-  const addTime = {date, time}
+  const d = new Date();
+  const date = d.getDate() + "/" + (d.getMonth() + 1) + "/" + d.getFullYear();
+  const time = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
+  const addTime = { date, time };
 
-const handleSubmit = (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
     const form = event.target;
     const serviceName = form.name.value;
@@ -21,26 +21,29 @@ const handleSubmit = (event) => {
     const description = form.description.value;
     const rating = null;
     form.reset();
-    fetch('http://localhost:5000/services', {
-        method: 'POST',
-        headers: {
-            'content-type': 'application/json',
-            authorization: `Bearer ${localStorage.getItem("ielts-hub-token")}`
-        },
-        body: JSON.stringify({serviceName, price, description, img, rating, addTime})
+    fetch("https://ielts-hub-server-jubayer44.vercel.app/services", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("ielts-hub-token")}`,
+      },
+      body: JSON.stringify({
+        serviceName,
+        price,
+        description,
+        img,
+        rating,
+        addTime,
+      }),
     })
-    .then(res => res.json())
-    .then(data => {
-        if(data.insertedId){
-            toast.success('Successfully added a service')
-            navigate('/services')
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.insertedId) {
+          toast.success("Successfully added a service");
+          navigate("/services");
         }
-    })
-};
-
-
-
-
+      });
+  };
 
   return (
     <section className=" flex flex-col-reverse gap-0 lg:grid-cols-12">
@@ -48,9 +51,7 @@ const handleSubmit = (event) => {
         <h1 className="mt-2 mb-4 text-xl text-center text-gray-800 font-bold">
           Add Service Here
         </h1>
-        <form
-        onSubmit={handleSubmit}
-        className="text-center">
+        <form onSubmit={handleSubmit} className="text-center">
           <label htmlFor="name">Service Name</label> <br />
           <input
             type="text"
@@ -83,7 +84,8 @@ const handleSubmit = (event) => {
             name="description"
             className="textarea textarea-info w-full max-w-xs text-lg font-sans"
             placeholder="write something"
-          ></textarea> <br />
+          ></textarea>{" "}
+          <br />
           <button className="btn btn-primary">Submit</button>
         </form>
       </div>

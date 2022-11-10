@@ -1,34 +1,33 @@
 import React, { useEffect, useState } from "react";
 import { PhotoProvider, PhotoView } from "react-photo-view";
-import 'react-photo-view/dist/react-photo-view.css';
+import "react-photo-view/dist/react-photo-view.css";
 
 import { Link } from "react-router-dom";
 
 const Service = () => {
   const [services, setServices] = useState([]);
-  const [loading , setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
 
-
-  useEffect(()=> {
-    fetch('http://localhost:5000/')
-    .then(res => res.json())
-    .then(data => {
-      setServices(data);
-      setLoading(false);
-    });
+  useEffect(() => {
+    fetch("https://ielts-hub-server-jubayer44.vercel.app/")
+      .then((res) => res.json())
+      .then((data) => {
+        setServices(data);
+        setLoading(false);
+      });
   }, []);
-
-
 
   return (
     <section className="my-10 px-3">
-      {
-        !loading ? loading : <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin dark:border-violet-400 mx-auto my-10"></div>
-      }
+      {!loading ? (
+        loading
+      ) : (
+        <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin dark:border-violet-400 mx-auto my-10"></div>
+      )}
       <div className="relative mx-auto max-w-7xl">
         <h1 className="text-4xl font-bold text-center">My Services</h1>
         <div className="grid max-w-lg gap-12 mx-auto mt-12 lg:grid-cols-3 lg:max-w-none">
-        {services?.map((service) => {
+          {services?.map((service) => {
             const { serviceName, price, description, img, _id } = service;
             return (
               <div
@@ -56,12 +55,14 @@ const Service = () => {
                       </h3>
                       <p className="text-red-500">Price: $ {price}</p>
                       <p className="text-lg font-normal text-gray-500 pb-14">
-                        {description.length > 100 ? description.slice(0, 100)+'...' : description}
+                        {description.length > 100
+                          ? description.slice(0, 100) + "..."
+                          : description}
                       </p>
                       <Link to={`/services/${_id}`}>
-                      <button className="btn btn-primary normal-case absolute bottom-0 w-full">
-                        Details
-                      </button>
+                        <button className="btn btn-primary normal-case absolute bottom-0 w-full">
+                          Details
+                        </button>
                       </Link>
                     </div>
                   </div>
@@ -71,9 +72,11 @@ const Service = () => {
           })}
         </div>
       </div>
-      <Link to='/services'><button className="btn btn-outline mb-2 mx-auto flex px-20">
-        See All
-      </button></Link>
+      <Link to="/services">
+        <button className="btn btn-outline mb-2 mx-auto flex px-20">
+          See All
+        </button>
+      </Link>
     </section>
   );
 };

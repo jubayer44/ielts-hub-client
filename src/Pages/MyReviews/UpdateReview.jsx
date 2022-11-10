@@ -4,7 +4,7 @@ import { useLoaderData, useNavigate } from "react-router-dom";
 import useTitle from "../../hooks/useTitle";
 
 const UpdateReview = () => {
-    useTitle('UpdateReview')
+  useTitle("UpdateReview");
   const review = useLoaderData();
   const { img, serviceName, userMessage, userEmail, _id } = review;
   const navigate = useNavigate();
@@ -13,10 +13,12 @@ const UpdateReview = () => {
     e.preventDefault();
     const text = e.target.text.value;
 
-    fetch(`http://localhost:5000/reviews/${_id}`, {
+    fetch(`https://ielts-hub-server-jubayer44.vercel.app/reviews/${_id}`, {
       method: "PATCH",
-      headers: { "Content-Type": "application/json",
-      authorization: `Bearer ${localStorage.getItem("ielts-hub-token")}` },
+      headers: {
+        "Content-Type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("ielts-hub-token")}`,
+      },
       body: JSON.stringify({ text }),
     })
       .then((res) => res.json())

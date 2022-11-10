@@ -14,55 +14,69 @@ import Services from "../Pages/services/Services";
 import PrivateRoutes from "./PrivateRoutes";
 
 const router = createBrowserRouter([
-    {
-        path: '/',
-        element: <Main/>,
-        errorElement: <ErrorPage/>,
-        children: [
-            {
-             path: '/',
-             element: <Home/>   
-            },
-            {
-                path: '/services',
-                element: <Services/>
-            },
-            {
-                path: '/contact',
-                element: <Contact/>
-            },
-            {
-                path: '/my-reviews',
-                element: <PrivateRoutes><MyReviews/></PrivateRoutes>
-            },
-            {
-                path: '/update/:id',
-                loader: ({params}) => fetch(`http://localhost:5000/update/${params.id}`),
-                element: <UpdateReview/>
-            },
-            {
-                path: '/add-service',
-                element: <PrivateRoutes><AddService/></PrivateRoutes>
-            },
-            {
-                path: '/login',
-                element: <Login/>
-            },
-            {
-                path: '/register',
-                element: <Register/>
-            },
-            {
-                path: '/blog',
-                element: <Blog/>
-            },
-            {
-                path: '/services/:id',
-                loader: ({params})=> fetch(`http://localhost:5000/services/${params.id}`),
-                element: <ServiceDetails/>
-            }
-        ]
-    }
+  {
+    path: "/",
+    element: <Main />,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        path: "/",
+        element: <Home />,
+      },
+      {
+        path: "/services",
+        element: <Services />,
+      },
+      {
+        path: "/contact",
+        element: <Contact />,
+      },
+      {
+        path: "/my-reviews",
+        element: (
+          <PrivateRoutes>
+            <MyReviews />
+          </PrivateRoutes>
+        ),
+      },
+      {
+        path: "/update/:id",
+        loader: ({ params }) =>
+          fetch(
+            `https://ielts-hub-server-jubayer44.vercel.app/update/${params.id}`
+          ),
+        element: <UpdateReview />,
+      },
+      {
+        path: "/add-service",
+        element: (
+          <PrivateRoutes>
+            <AddService />
+          </PrivateRoutes>
+        ),
+      },
+      {
+        path: "/login",
+        element: <Login />,
+      },
+      {
+        path: "/register",
+        element: <Register />,
+      },
+      {
+        path: "/blog",
+        element: <Blog />,
+      },
+      {
+        path: "/services/:id",
+        loader: ({ params }) =>
+          fetch(
+            `https://ielts-hub-server-jubayer44.vercel.app/services/${params.id}`
+          ),
+        element: <ServiceDetails />,
+      },
+    ],
+  },
 ]);
 
 export default router;

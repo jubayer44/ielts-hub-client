@@ -10,7 +10,7 @@ const Subscribe = () => {
             <div className="relative inline-flex items-center mx-auto align-middle">
               <div className="pb-12 text-center">
                 <h1 className="text-2xl font-bold leading-none tracking-tighter text-neutral-600">
-                SUBSCRIBE to get New Lessons & Tips by Email
+                  SUBSCRIBE to get New Lessons & Tips by Email
                 </h1>
 
                 <form
@@ -32,15 +32,9 @@ const Subscribe = () => {
                     />
                   </div>
                   <div className="mt-4 sm:mt-0 sm:ml-3 revue-form-actions">
-                    <button
-                      type="submit"
-                      value="Subscribe"
-                      name="member[subscribe]"
-                      id="member_submit"
-                      className="block w-full px-5 py-3 text-base font-medium text-white bg-blue-600 border border-transparent rounded-lg shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300 sm:px-10"
-                    >
+                    <p className="cursor-pointer block w-full px-5 py-3 text-base font-medium text-white bg-blue-600 border border-transparent rounded-lg shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300 sm:px-10">
                       Subscribe
-                    </button>
+                    </p>
                   </div>
                 </form>
                 <div className="sm:max-w-lg sm:flex md:mx-auto">

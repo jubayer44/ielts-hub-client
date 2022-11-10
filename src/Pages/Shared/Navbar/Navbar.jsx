@@ -18,7 +18,9 @@ export default function NavBar() {
         <div>
           <div className="flex items-center justify-between py-3 md:py-5 md:block">
             <div>
-              <h2 className="text-2xl font-bold font-mono text-violet-600">IELTS Hub</h2>
+              <h2 className="text-2xl font-bold font-mono text-violet-600">
+                IELTS Hub
+              </h2>
             </div>
             <div className="md:hidden">
               <button
@@ -66,32 +68,80 @@ export default function NavBar() {
           >
             <ul className="items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0">
               <li className="text-gray-600 hover:text-blue-600">
-                <NavLink className={({isActive }) => isActive ? 'underline decoration-2' : null} to="/">Home</NavLink>
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive ? "underline decoration-2" : null
+                  }
+                  to="/"
+                >
+                  Home
+                </NavLink>
               </li>
               <li className="text-gray-600 hover:text-blue-600">
-                <NavLink className={({isActive }) => isActive ? 'underline decoration-2' : null} to="/blog">Blog</NavLink>
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive ? "underline decoration-2" : null
+                  }
+                  to="/blog"
+                >
+                  Blog
+                </NavLink>
               </li>
               <li className="text-gray-600 hover:text-blue-600">
-                <NavLink className={({isActive }) => isActive ? 'underline decoration-2' : null} to="/contact">Contact</NavLink>
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive ? "underline decoration-2" : null
+                  }
+                  to="/contact"
+                >
+                  Contact
+                </NavLink>
               </li>
 
               {user ? (
                 <>
                   <li className="text-gray-600 hover:text-blue-600">
-                    <NavLink className={({isActive }) => isActive ? 'underline decoration-2' : null} to="/my-reviews">My Review</NavLink>
+                    <NavLink
+                      className={({ isActive }) =>
+                        isActive ? "underline decoration-2" : null
+                      }
+                      to="/my-reviews"
+                    >
+                      My Review
+                    </NavLink>
                   </li>
                   <li className="text-gray-600 hover:text-blue-600">
-                    <NavLink className={({isActive }) => isActive ? 'underline decoration-2' : null} to="/add-service">Add Service</NavLink>
+                    <NavLink
+                      className={({ isActive }) =>
+                        isActive ? "underline decoration-2" : null
+                      }
+                      to="/add-service"
+                    >
+                      Add Service
+                    </NavLink>
                   </li>
                   <li className="text-gray-600 hover:text-blue-600">
-                    <NavLink onClick={handleLogOut} className={({isActive }) => isActive ? 'underline decoration-2' : null} to="/login">
+                    <NavLink
+                      onClick={handleLogOut}
+                      className={({ isActive }) =>
+                        isActive ? "underline decoration-2" : null
+                      }
+                      to="/login"
+                    >
                       Log Out
                     </NavLink>
                   </li>
                 </>
               ) : (
                 <li className="text-gray-600 hover:text-blue-600">
-                  <NavLink className={({isActive }) => isActive ? 'underline decoration-2' : null} to="/login">Login</NavLink>
+                  <NavLink
+                    className={({ isActive }) =>
+                      isActive ? "underline decoration-2" : null
+                    }
+                    to="/login"
+                  >
+                    Login
+                  </NavLink>
                 </li>
               )}
               <li className="">

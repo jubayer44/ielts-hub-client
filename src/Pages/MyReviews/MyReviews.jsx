@@ -13,11 +13,14 @@ const MyReviews = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/my-reviews?email=${user?.email}`, {
-      headers: {
-        authorization: `Bearer ${localStorage.getItem("ielts-hub-token")}`,
-      },
-    })
+    fetch(
+      `https://ielts-hub-server-jubayer44.vercel.app/my-reviews?email=${user?.email}`,
+      {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("ielts-hub-token")}`,
+        },
+      }
+    )
       .then((res) => {
         if (res.status === 403 || res.status === 401) {
           logOut();
@@ -40,7 +43,7 @@ const MyReviews = () => {
     const process = window.confirm("Are you sure you want to delete");
 
     if (process) {
-      fetch(`http://localhost:5000/reviews/${id}`, {
+      fetch(`https://ielts-hub-server-jubayer44.vercel.app/reviews/${id}`, {
         method: "DELETE",
         headers: {
           authorization: `Bearer ${localStorage.getItem("ielts-hub-token")}`,

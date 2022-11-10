@@ -17,12 +17,14 @@ const About = () => {
               Jubayer Ahmed
             </h4>
             <p className="">
-              Hi, my name is Jubayer Ahmed. I am your teacher and the author of this website, I am an Experienced, qualified English teacher specialising IELTS test preparation since 2008. Please enjoy the 300 pages of free lesson, tips, model, topics etc.
+              Hi, my name is Jubayer Ahmed. I am your teacher and the author of
+              this website, I am an Experienced, qualified English teacher
+              specialising IELTS test preparation since 2008. Please enjoy the
+              300 pages of free lesson, tips, model, topics etc.
             </p>
           </div>
         </div>
         <div className="flex justify-center pt-4 space-x-4 align-center">
-          
           <Link
             rel="noopener noreferrer"
             to="/about"

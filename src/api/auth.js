@@ -3,7 +3,7 @@ export const setAuthToken = (user) => {
     email: user.email,
   };
 
-  fetch("http://localhost:5000/jwt", {
+  fetch("https://ielts-hub-server-jubayer44.vercel.app/jwt", {
     method: "POST",
     headers: {
       "content-type": "application/json",
