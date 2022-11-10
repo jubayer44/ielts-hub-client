@@ -32,7 +32,7 @@ const UpdateReview = () => {
 
   return (
     <div className=" md:flex rounded bg-base-100 shadow-xl p-5 mx-10 my-10">
-      <img src={img} alt="" className="rounded max-w-[730px]" />
+      <img src={img} alt="" className="rounded w-full max-w-[730px]" />
 
       <div className="card-body">
         <h2 className="text-4xl font-bold">{serviceName}</h2>
@@ -44,9 +44,9 @@ const UpdateReview = () => {
             className="textarea text-gray-600 textarea-info w-full max-w-md"
             defaultValue={userMessage}
           ></textarea>
-          <p className="text-gray-500 mt-3">{userEmail}</p>
+          <p className="text-gray-500 mt-3 break-words">{userEmail}</p>
           <div className="card-actions justify-end">
-            <button type="submit" className="btn btn-primary">
+            <button type="submit" className="btn btn-primary mt-4">
               Update
             </button>
           </div>

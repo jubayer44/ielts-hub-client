@@ -6,7 +6,7 @@ const Blog = () => {
 
   return (
     <div className="my-10 w-4/5 mx-auto">
-      <h1 className="text-3xl font-bold text-center">Blog</h1>
+      <h1 className="text-3xl font-bold text-center mb-5">Blog</h1>
       <div className="mt-4">
         <h2 className="text-xl font-bold">
           1. Difference between SQL and NoSQL
